@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# 🛒 Frontend Challenge: "ShopLite" E-Commerce Store
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Difficulty:** Hard  
+**Test Cases:** 30 (Automated)  
+**Stack:** React (Hooks, Context API, Router)
 
-## Available Scripts
+## 📝 The Scenario
 
-In the project directory, you can run:
+You are building a single-page e-commerce store. The application must fetch a list of products, allow users to filter/sort them, view details, and manage a shopping cart.
 
-### `npm start`
+## ⚙️ Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1.  **Create App:** `npx create-react-app shop-lite`
+2.  **Install Router:** `npm install react-router-dom`
+3.  **Install Testing Libs:** `npm install --save-dev @testing-library/react @testing-library/user-event @testing-library/jest-dom`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📋 Requirements
 
-### `npm test`
+### 1. Home Page (`/`)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Fetch Data:** Load products from `https://fakestoreapi.com/products` (or use the provided mock).
+- **Loading/Error:** Show a "Loading..." text while fetching. Show "Error" if it fails.
+- **Display:** Grid of product cards (Image, Title, Price, "Add to Cart" button).
+- **Filters:**
+  - **Search Bar:** Filter by title.
+  - **Category Dropdown:** Filter by category.
+- **Sort:** Sort by Price (Low-to-High vs High-to-Low).
 
-### `npm run build`
+### 2. Product Detail Page (`/product/:id`)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Clicking a product title navigates to this page.
+- Shows full description and larger image.
+- "Back" button returns to Home.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. Shopping Cart
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Global State:** Cart data must persist across pages.
+- **Add Item:**
+  - If item exists, increment quantity.
+  - If new, add to cart with quantity 1.
+- **Cart View:**
+  - List items with Quantity controls (+ / -).
+  - Remove button.
+  - **Total Price:** accurately calculated.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🧪 The 30 Test Cases (Grading Rubric)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Your app must pass these checks in `App.test.js`:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Group            | Tests | Focus                                         |
+| :--------------- | :---- | :-------------------------------------------- |
+| **Structure**    | 1-5   | Header, Navigation, Basic Rendering           |
+| **Data**         | 6-9   | Async Fetching, Loading, Error States         |
+| **Interactions** | 10-15 | Searching, Filtering, Sorting                 |
+| **Navigation**   | 16-19 | Routing between Home and Details              |
+| **Cart Logic**   | 20-27 | Adding, Removing, Updating Quantities, Totals |
+| **Edge Cases**   | 28-30 | Empty states, 404 Pages                       |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 💡 Critical Test IDs
 
-## Learn More
+You **MUST** use these `data-testid` attributes:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `loading-msg`, `error-msg`
+- `product-item` (The card container)
+- `search-input`, `category-select`, `sort-select`
+- `add-to-cart-btn`
+- `cart-link` (The nav link to view cart)
+- `cart-item`, `cart-total`, `cart-empty`
+- `qty-increase`, `qty-decrease`, `remove-btn`
